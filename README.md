@@ -1,5 +1,3 @@
-# Java-Chess-With-GUI-
-Created a Java Chess GUI 
 # Java Chess With GUI
 
 ## Project Goals
