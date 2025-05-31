@@ -21,5 +21,6 @@ Created a Java Chess GUI
    git clone https://github.com/grugg1233/Java-Chess-With-GUI-.git
    cd Java-Chess-With-GUI-
 2. **Build the program** 
+    ```bash
     javac main.java Frame.java Board.java Piece.java
     java main
