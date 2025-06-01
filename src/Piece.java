@@ -1,6 +1,7 @@
 public class Piece {
     private String p;
-
+    private char p1 = 'w'; 
+    private char p2 = 'b'; 
     public Piece(int i, int j) {
         if (i == 1 || i == 6) {
             p = "P";
@@ -43,4 +44,11 @@ public class Piece {
     public String toString() {
         return p;
     }
+
+    // public int[] getLegal(int i, int j) {
+    //     if(p == "P") {
+
+    //     }
+    //     return null; 
+    // }
 }

@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class Frame {
 
@@ -31,8 +31,7 @@ public class Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Board board = new Board();
-                JFrame frame = new JFrame("JPanelGrid");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.getContentPane().removeAll();
                 frame.getContentPane().add(board);
                 frame.pack();
                 frame.setLocationRelativeTo(null);

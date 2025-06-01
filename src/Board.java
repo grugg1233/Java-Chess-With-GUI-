@@ -1,13 +1,12 @@
-import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Board extends JPanel {
 
-    private static final int SML_SIDE = 3;
-    private static final int SIDE = SML_SIDE * SML_SIDE;
+    private static final int SIDE = 8;
     private static final int GAP = 0;
     private static final Color BG = Color.BLACK;
     private static final Dimension BTN_PREF_SIZE = new Dimension(80, 80);
@@ -16,28 +15,28 @@ public class Board extends JPanel {
 
     public Board() {
         setBackground(BG);
-        setLayout(new GridLayout(SML_SIDE, SML_SIDE, GAP, GAP));
+        // 8×8 grid, no sub‐panels
+        setLayout(new GridLayout(SIDE, SIDE, GAP, GAP));
         setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
 
-        JPanel[][] smallPanels = new JPanel[SML_SIDE][SML_SIDE];
-        for (int i = 0; i < smallPanels.length; i++) {
-            for (int j = 0; j < smallPanels[i].length; j++) {
-                smallPanels[i][j] = new JPanel(new GridLayout(SML_SIDE, SML_SIDE));
-                add(smallPanels[i][j]);
-            }
-        }
-
-        for (int i = 0; i < buttons.length; i++) {
-            int panelI = i / SML_SIDE;
-            for (int j = 0; j < buttons[i].length; j++) {
-                int panelJ = j / SML_SIDE;
+        // Create and add each button directly to this panel
+        for (int i = 0; i < SIDE; i++) {
+            for (int j = 0; j < SIDE; j++) {
                 Piece p = new Piece(i, j);
                 String piece = p.toString();
 
                 buttons[i][j] = new JButton(piece);
                 buttons[i][j].setPreferredSize(BTN_PREF_SIZE);
-                smallPanels[panelI][panelJ].add(buttons[i][j]);
+                bcolor(i,j, buttons[i][j]);
+                add(buttons[i][j]);
             }
         }
+
+
+    }
+    public static void bcolor(int i, int j, JButton x) {
+        if( (i%2 != 0 && j % 2 == 0) || i%2 == 0 && j %2 !=0 )
+            x.setBackground(Color.CYAN);
+        else  x.setBackground(Color.WHITE);
     }
 }
