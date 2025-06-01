@@ -1,7 +1,5 @@
 public class Piece {
     private String p;
-    private char p1 = 'w'; 
-    private char p2 = 'b'; 
     public Piece(int i, int j) {
         if (i == 1 || i == 6) {
             p = "P";
@@ -18,10 +16,10 @@ public class Piece {
                     p = "B";
                     break;
                 case 3:
-                    p = (j == 8) ? "Q" : "K";
+                    p = (i == 7) ? "Q" : "K";
                     break;
                 case 4:
-                    p = (j == 8) ? "K" : "Q";
+                    p = (i == 7) ? "K" : "Q";
                     break;
                 case 5:
                     p = "B";
@@ -45,10 +43,19 @@ public class Piece {
         return p;
     }
 
-    // public int[] getLegal(int i, int j) {
-    //     if(p == "P") {
-
-    //     }
-    //     return null; 
-    // }
+    public int[] getLegal(int i, int j) {
+        
+        int[] legal; 
+        if(p.equals("P")) {
+            if(i == 6) 
+            {
+                legal = new int[]{i-1, i-2}; 
+            } 
+            else {
+                legal = new int[]{i-1}; 
+            }
+        }
+        else legal =new int[]{}; 
+        return legal; 
+    }
 }

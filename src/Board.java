@@ -28,12 +28,26 @@ public class Board extends JPanel {
                 buttons[i][j] = new JButton(piece);
                 buttons[i][j].setPreferredSize(BTN_PREF_SIZE);
                 bcolor(i,j, buttons[i][j]);
+
+                final int row = i;
+                final int col = j;
+                buttons[i][j].addActionListener(e -> {
+                    handleClick(row, col, p);
+                });
+
                 add(buttons[i][j]);
             }
         }
 
-
     }
+
+    private void handleClick(int row, int col, Piece p) {
+            int[] legalMoves = p.getLegal(row, col); 
+            for (int i = 0; i < legalMoves.length ; i++) {
+                buttons[legalMoves[i]][col].setBackground(Color.YELLOW);
+            }
+    }
+
     public static void bcolor(int i, int j, JButton x) {
         if( (i%2 != 0 && j % 2 == 0) || i%2 == 0 && j %2 !=0 )
             x.setBackground(Color.CYAN);

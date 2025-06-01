@@ -3,13 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Frame {
+public class ChessFrame {
 
-    public Frame() {
+    public ChessFrame() {
         // Create the main frame
-        JFrame frame = new JFrame("Chess");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+        JFrame cframe = new JFrame("Chess");
+        cframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        cframe.setSize(800, 800);
 
         // Create a menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -31,21 +31,21 @@ public class Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Board board = new Board();
-                frame.getContentPane().removeAll();
-                frame.getContentPane().add(board);
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                cframe.getContentPane().removeAll();
+                cframe.getContentPane().add(board);
+                cframe.pack();
+                cframe.setLocationRelativeTo(null);
+                cframe.setVisible(true);
             }
         });
 
 
         // Set layout for the main frame
-        frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(menuBar);
-        frame.add(panel, BorderLayout.CENTER);
+        cframe.setLayout(new BorderLayout());
+        cframe.setJMenuBar(menuBar);
+        cframe.add(panel, BorderLayout.CENTER);
 
 
-        frame.setVisible(true);
+        cframe.setVisible(true);
     }
 }
