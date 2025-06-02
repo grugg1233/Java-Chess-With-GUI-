@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -12,6 +15,8 @@ public class Board extends JPanel {
     private static final Dimension BTN_PREF_SIZE = new Dimension(80, 80);
 
     private JButton[][] buttons = new JButton[SIDE][SIDE];
+
+    private List<Point> highlighted = new ArrayList<>(); 
 
     public Board() {
         setBackground(BG);
@@ -42,10 +47,42 @@ public class Board extends JPanel {
     }
 
     private void handleClick(int row, int col, Piece p) {
-            int[] legalMoves = p.getLegal(row, col); 
-            for (int i = 0; i < legalMoves.length ; i++) {
-                buttons[legalMoves[i]][col].setBackground(Color.YELLOW);
+            if(!highlighted.isEmpty()) {
+                for(Point pt : highlighted) {
+                    int r = pt.x, c = pt.y; 
+                    bcolor(r,c, buttons[r][c]);
+                }
+                highlighted.clear(); 
+            }    
+            // List<Point> toRemove  = new ArrayList<>(); 
+
+            List<Point> legalMoves = p.getLegal(row, col); 
+            for (Point move : legalMoves) {
+                if(buttons[move.x][move.y].getText().equals("")){
+                    buttons[move.x][move.y].setBackground(Color.YELLOW);
+                    
+                }
+                else if (buttons[move.x][move.y].getText().charAt(0) == '2') {
+                    buttons[move.x][move.y].setBackground(Color.RED);
+                    // if(another matching x or matching y remove from legalmoves )
+                }
+                // else {
+                // // allied piece or other occupancy (not “2”), but still block sliding pieces
+                //     if (p.toString().equals("K") ||
+                //         p.toString().equals("Q") ||
+                //         p.toString().equals("R") ||
+                //         p.toString().equals("B")) {
+                //         for (Point other : legalMoves) {
+                //             if (other != move && (other.x == move.x || other.y == move.y)) {
+                //                 toRemove.add(other);
+                //             }
+                //         }
+                //     }
+                // }
+                highlighted.add(new Point(move.x,move.y));
+
             }
+            // legalMoves.removeAll(toRemove); 
     }
 
     public static void bcolor(int i, int j, JButton x) {
