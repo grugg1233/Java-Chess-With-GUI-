@@ -21,5 +21,5 @@
    cd src
 2. **Build the program** 
     ```bash
-    javac main.java Frame.java Board.java Piece.java
+    javac main.java ChessFrame.java Board.java Piece.java
     java main
