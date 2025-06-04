@@ -8,7 +8,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Board extends JPanel {
-
+    public String[][] boardState = new String[8][8];
     private static final int SIDE = 8;
     private static final int GAP = 0;
     private static final Color BG = Color.BLACK;
@@ -27,7 +27,7 @@ public class Board extends JPanel {
         // Create and add each button directly to this panel
         for (int i = 0; i < SIDE; i++) {
             for (int j = 0; j < SIDE; j++) {
-                Piece p = new Piece(i, j);
+                Piece p = new Piece(i, j, boardState);
                 String piece = p.toString();
 
                 buttons[i][j] = new JButton(piece);
@@ -54,35 +54,24 @@ public class Board extends JPanel {
                 }
                 highlighted.clear(); 
             }    
-            // List<Point> toRemove  = new ArrayList<>(); 
+            
+            List<Point> legalMoves = p.getLegal(row, col, boardState); 
 
-            List<Point> legalMoves = p.getLegal(row, col); 
             for (Point move : legalMoves) {
+
                 if(buttons[move.x][move.y].getText().equals("")){
                     buttons[move.x][move.y].setBackground(Color.YELLOW);
                     
                 }
                 else if (buttons[move.x][move.y].getText().charAt(0) == '2') {
-                    buttons[move.x][move.y].setBackground(Color.RED);
-                    // if(another matching x or matching y remove from legalmoves )
+                     buttons[move.x][move.y].setBackground(Color.RED);
+
                 }
-                // else {
-                // // allied piece or other occupancy (not “2”), but still block sliding pieces
-                //     if (p.toString().equals("K") ||
-                //         p.toString().equals("Q") ||
-                //         p.toString().equals("R") ||
-                //         p.toString().equals("B")) {
-                //         for (Point other : legalMoves) {
-                //             if (other != move && (other.x == move.x || other.y == move.y)) {
-                //                 toRemove.add(other);
-                //             }
-                //         }
-                //     }
-                // }
+
                 highlighted.add(new Point(move.x,move.y));
 
             }
-            // legalMoves.removeAll(toRemove); 
+            
     }
 
     public static void bcolor(int i, int j, JButton x) {
