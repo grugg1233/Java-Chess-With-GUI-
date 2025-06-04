@@ -48,7 +48,7 @@ public class Piece {
             p = "";
             
             if (i == 3 && j == 3) {
-                p = "R";
+                p = "N";
                
             }
         }
@@ -62,6 +62,64 @@ public class Piece {
 
     public List<Point> getLegal(int i, int j, String[][] boardState) {
         List<Point> legal = new ArrayList<>();
+        if (p.equals("K")) {
+            // Up
+            if (i - 1 >= 0) {
+                String cell = boardState[i - 1][j];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i - 1, j));
+                }
+            }
+            // Down
+            if (i + 1 < 8) {
+                String cell = boardState[i + 1][j];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i + 1, j));
+                }
+            }
+            // Left
+            if (j - 1 >= 0) {
+                String cell = boardState[i][j - 1];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i, j - 1));
+                }
+            }
+            // Right
+            if (j + 1 < 8) {
+                String cell = boardState[i][j + 1];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i, j + 1));
+                }
+            }
+            // Up‐Left
+            if (i - 1 >= 0 && j - 1 >= 0) {
+                String cell = boardState[i - 1][j - 1];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i - 1, j - 1));
+                }
+            }
+            // Up‐Right
+            if (i - 1 >= 0 && j + 1 < 8) {
+                String cell = boardState[i - 1][j + 1];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i - 1, j + 1));
+                }
+            }
+            // Down‐Left
+            if (i + 1 < 8 && j - 1 >= 0) {
+                String cell = boardState[i + 1][j - 1];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i + 1, j - 1));
+                }
+            }
+            // Down‐Right
+            if (i + 1 < 8 && j + 1 < 8) {
+                String cell = boardState[i + 1][j + 1];
+                if (cell.equals("") || cell.charAt(0) == '2') {
+                    legal.add(new Point(i + 1, j + 1));
+                }
+            }
+        }
 
         if (p.equals("P")) {
             if (i > 0 && boardState[i-1][j].equals("")) {
@@ -215,6 +273,97 @@ public class Piece {
                 }
                 if (cell.charAt(0) == '2') {
                     legal.add(new Point(r, c));
+                }
+                break;
+            }
+        }
+        else if (p.equals("Q")) {
+            for (int r = i-1, c = j-1; r >= 0 && c >= 0; r--, c--) {
+                String cell = boardState[r][c];
+                if (cell.equals("")) {
+                    legal.add(new Point(r, c));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(r, c));
+                }
+                break;
+            }
+            for (int r = i-1, c = j+1; r >= 0 && c < 8; r--, c++) {
+                String cell = boardState[r][c];
+                if (cell.equals("")) {
+                    legal.add(new Point(r, c));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(r, c));
+                }
+                break;
+            }
+            for (int r = i+1, c = j-1; r < 8 && c >= 0; r++, c--) {
+                String cell = boardState[r][c];
+                if (cell.equals("")) {
+                    legal.add(new Point(r, c));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(r, c));
+                }
+                break;
+            }
+            for (int r = i+1, c = j+1; r < 8 && c < 8; r++, c++) {
+                String cell = boardState[r][c];
+                if (cell.equals("")) {
+                    legal.add(new Point(r, c));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(r, c));
+                }
+                break;
+            }
+
+            for (int r = i-1; r >= 0; r--) {
+                String cell = boardState[r][j];
+                if (cell.equals("")) {
+                    legal.add(new Point(r, j));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(r, j));
+                }
+                break;
+            }
+            for (int r = i+1; r < 8; r++) {
+                String cell = boardState[r][j];
+                if (cell.equals("")) {
+                    legal.add(new Point(r, j));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(r, j));
+                }
+                break;
+            }
+            for (int c = j-1; c >= 0; c--) {
+                String cell = boardState[i][c];
+                if (cell.equals("")) {
+                    legal.add(new Point(i, c));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(i, c));
+                }
+                break;
+            }
+            for (int c = j+1; c < 8; c++) {
+                String cell = boardState[i][c];
+                if (cell.equals("")) {
+                    legal.add(new Point(i, c));
+                    continue;
+                }
+                if (cell.charAt(0) == '2') {
+                    legal.add(new Point(i, c));
                 }
                 break;
             }
